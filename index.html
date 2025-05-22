@@ -37,68 +37,38 @@
 </body>
 
 </html>
-
 <script>
+  function result() {
+    let d1 = Number(document.getElementById("date").value.trim());
+    let m1 = Number(document.getElementById("month").value.trim());
+    let y1 = Number(document.getElementById("year").value.trim());
 
-var bd=document.getElementById("date");
-var bm=document.getElementById("month");
-var by=document.getElementById("year");
-
-var today=new Date();
-
-var cd=today.getDate();
-var cm=today.getMonth()+1;
-var cy=today.getFullYear();
-
-
-var tot=document.getElementById("ans")
-
-
-function result()
-{
-  var d1=Number(bd.value);
-  var m1=Number(bm.value);
-  var y1=Number(by.value);
-  
-  var today=new Date();
-  var d2=today.getDate();
-  var m2=today.getMonth()+1;
-  var y2=today.getFullYear();
-  
-  if (m1>m2){
-    dy=y2-1;
-    dm=m2+12;
-    if (d1>d2){
-      nm=dm-1;
-      nd=d2+30;
-      d=nd-d1;
-      m=nm-m1;
-      y=dy-y1;
+    if (!d1 || !m1 || !y1) {
+      alert("Please fill all the fields properly!");
+      return;
     }
-    else{
-      d=d2-d1;
-      m=dm-m1;
-      y=dy-y1;
+
+    let today = new Date();
+    let d2 = today.getDate();
+    let m2 = today.getMonth() + 1;
+    let y2 = today.getFullYear();
+
+    let d, m, y;
+
+    if (d1 > d2) {
+      d2 += 30;
+      m2 -= 1;
     }
+    d = d2 - d1;
+
+    if (m1 > m2) {
+      m2 += 12;
+      y2 -= 1;
+    }
+    m = m2 - m1;
+    y = y2 - y1;
+
+    document.getElementById("ans").textContent =
+      "Age: " + y + " years, " + m + " months, " + d + " days";
   }
-  else if (d1>d2){
-    dm=m2-1;
-    dd=d2+30;
-    d=dd-d1;
-    m=dm-m1;
-    y=y2-y1;
-  }
-  else{
-    d=d2-d1;
-    m=m2-m1;
-    y=y2-y1;
-  }
-
-  tot.textContent="You Are Born In "
-  +y+" years "+m+" months "+d+" days";
-}
-
-
-
 </script>
-
